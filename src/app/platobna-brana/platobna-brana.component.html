@@ -1,0 +1,45 @@
+<mat-card>
+  <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  <mat-card-header>
+    <mat-card-title>Odoslať platbu</mat-card-title>
+    <mat-card-subtitle>Vyplňte prosím všetky polia</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Číslo transakcie" 
+        required
+        [(ngModel)]="model.id" name="id">
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Číslo vlastníka" 
+          required
+          [(ngModel)]="model.vlastnikId" name="vlastnikId">
+        </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Suma"
+        required
+        [(ngModel)]="model.suma" name="suma">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Select"
+        [(ngModel)]="model.typ" name="typ">
+          <mat-option *ngFor="let typp of typyTransakcie" [value]="typp.typ">{{typp.nazov}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions class="buttons">
+    <a (click)="goBack()"><button mat-button>Zrušiť</button></a>
+    <a (click)="novaTransakcia()"><button mat-button type="submit">Odoslať</button></a>
+  </mat-card-actions>
+  </form>
+</mat-card>
+
+<!-- {{diagnostic}} -->

@@ -1,0 +1,62 @@
+<mat-list *ngFor="let ucet of ucty$ | async">
+  <mat-list-item>
+    {{ ucet.nazov }}
+  </mat-list-item>
+
+
+  <mat-table #table class="mat-elevation-z8" [dataSource]="dataSource" >
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID transakcie </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      <td mat-footer-cell *matFooterCellDef>Aktuálny stav účtu: </td>
+    </ng-container>
+
+    <!-- vlastnikId Column -->
+    <ng-container matColumnDef="vlastnikId">
+      <mat-header-cell *matHeaderCellDef> Vlastník účtu </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.vlastnikId}}{{vratMenoMajitelaUctu(element.vlastnikId)}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+    </ng-container>
+
+    <!-- typ Column -->
+    <ng-container matColumnDef="typ">
+      <mat-header-cell *matHeaderCellDef> Typ transakcie </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ vratMenoTypu(element.typ) }} </mat-cell>
+      <mat-footer-cell *matFooterCellDef>
+        <a [routerLink]="['/reporty', ucet.id]" routerLinkActive="router-link-active">
+          <button mat-button>Reporty</button>
+        </a>
+      </mat-footer-cell>
+    </ng-container>
+
+    <!-- suma Column -->
+    <ng-container matColumnDef="suma">
+      <mat-header-cell *matHeaderCellDef> Suma </mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="element.jeToPrijem ? 'make-green' : 'make-red'">
+        {{element.suma}} €
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{vratStavUctuCezId(vybranyUcetId)}} €</mat-footer-cell>
+    </ng-container>
+
+    <!-- Detail Column -->
+    <ng-container matColumnDef="detail">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; Detail </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-button [routerLink]="['/transakcia', element.id]" routerLinkActive="router-link-active">
+          <mat-icon>arrow_right_alt</mat-icon>
+        </mat-button>
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef>
+        <a routerLink="/platba" routerLinkActive="router-link-active">
+          <button mat-button>Poslať peniaze</button>
+        </a>
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+  </mat-table>
+
+</mat-list>

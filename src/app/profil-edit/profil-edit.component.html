@@ -1,0 +1,67 @@
+<div *ngIf="klient$ | async as profil">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Zmena údajov užívateľa {{ profil.meno | uppercase }}</mat-card-title>
+      <mat-card-subtitle><span>ID: </span>{{ profil.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+
+        <mat-list-item>
+          <div>
+            <label>Titul pred menom:
+              <input [(ngModel)]="profil.titulPred" placeholder="Titul pred menom">
+            </label>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item>
+          <div>
+            <label>Meno:
+              <input [(ngModel)]="profil.meno" placeholder="Meno">
+            </label>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+
+          <div>
+            <label>Priezvisko:
+              <input [(ngModel)]="profil.priezvisko" placeholder="Priezvisko">
+            </label>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>
+            <label>Titul za menom:
+              <input [(ngModel)]="profil.titulZa" placeholder="Titul za menom">
+            </label>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>
+            <label>Trvalý pobyt:
+              <input [(ngModel)]="profil.trvalyPobyt" placeholder="Trvalý pobyt">
+            </label>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>
+            <label>Korešpondenčná adresa:
+              <input [(ngModel)]="profil.korespondencnaAdresa" placeholder="Korešpondenčná adresa">
+            </label>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="ukonciEditaciu(profil)">Ukončiť editáciu</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+
+
+
+</div>
